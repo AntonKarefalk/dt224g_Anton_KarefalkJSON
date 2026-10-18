@@ -21,3 +21,19 @@ function validateSearch(searchTerm) {
         return false;
     }
 }
+
+/* Hämtar recept från dummyJSON api och skickar en förfråga till api*/
+async function fetchRecipe(searchTerm) {
+    const url = 'https://dummyjson.com/recipes/search?q=${(searchTerm)}';
+    const response = await fetch(url);
+    
+    /* Kollar om servern kunde ge svaret och ger ett error meddelande om det gick fel */
+    if (!response.ok) {
+        throw new Error("Det gick inte att hämta recepten.")
+    }
+
+    /* Gör så att svaret från JSON blir ett JavaScript objekt */
+    const data = await response.json();
+    return data;
+    
+}
