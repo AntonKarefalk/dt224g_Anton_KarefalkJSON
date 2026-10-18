@@ -17,7 +17,7 @@ function validateSearch(searchTerm) {
 
     /* Kollar om sökfältet är tomt och ger ett passande felmedellande */
     if (searchTerm.trim() === "") {
-        errorEl.textContent = "Skriv in ett recept att söka efter.";
+        errorEl.textContent = "Du måste fylla i en sökfras!";
         return false;
     }
 }
@@ -58,4 +58,43 @@ function displayRecipe(recipe) {
         image.alt = "Bilden kunde inte laddas.";
         image.removeAttribute("src");
     });
+    article.appendChild(image);
+
+    /* Skapa ett ställe för informationen om recepten at visas */
+    const recipeInfo = document.createElement("div");
+    recipeInfo.classList.add("recipe-info");
+
+    /* Antal portioner */
+    const servings = document.createElement("p");
+    servings.textContent = 'Servings: ${recipe.servings}';
+    recipeInfo.appendChild(servings);
+
+    /* Tid */
+    const prepTime = document.createElement("p");
+    prepTime.textContent = 'Prep rime: ${recipe.prepTimeMinutes} minutes';
+    recipeInfo.appendChild(prepRime);
+
+    /* Svårighet*/
+    const difficulty = document.createElement("p");
+    difficulty.textContent = 'Difficulty: ${recipe.difficulty}';
+    recipeInfo.appendChild(difficulty);
+    article.appendChild(recipeInfo);
+
+    /*Skapar rubrik och lista för ingredienserna */
+    /*Rubrik */
+    const ingredientsTitle = document.createElement("h4");
+    ingredientsTitle.textContent = "Ingredients";
+    article.appendChild(ingredientsTitle);
+
+    /*Lista */
+    const IngredientsList = document.createElement("ul");
+    recipe.Ingredients.forEach(function (Ingredient) {
+        const listItem = document.createElement("li");
+        listItem.textContent = Ingredient;
+        IngredientsList.appendChild(listItem);
+        });
+        article.appendChild(IngredientsList);
 }
+
+
+
