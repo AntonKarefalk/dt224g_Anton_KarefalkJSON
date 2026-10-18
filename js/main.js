@@ -37,3 +37,25 @@ async function fetchRecipe(searchTerm) {
     return data;
     
 }
+
+/* Visar informationen om receptet på webbsidan */
+function displayRecipe(recipe) {
+    /* skapar article */
+    const article = document.createElement("article");
+
+    /* Rubrik */
+    const title = document.createElement("h3");
+    title.textContent = recipe.name
+    article.appendChild(title);
+
+    /* Bild*/
+    const image = document.createElement("img");
+    image.src = recipe.image;
+    image.src = recipe.name;
+
+    /*Felmeddelande om bilden inte laddades*/
+    image.addEventListener("error", function () {
+        image.alt = "Bilden kunde inte laddas.";
+        image.removeAttribute("src");
+    });
+}
